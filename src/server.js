@@ -32,15 +32,22 @@ app.get('/notes/:noteId', (req, res) => {
     .status(200)
     .json({ id: noteId, message: `Retrieved note with ID: ${noteId}` });
 });
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   res.status(404).json({ message: 'Route not found', error: err.message });
 });
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message });
+  const isProd = process.env.NODE_ENV === 'production';
+  res.status(500).json({
+    message: isProd
+      ? 'Something went wrong. Please try again later.'
+      : err.message,
+  });
 });
 
 app.get('/test-error', (req, res) => {
   throw new Error('Simulated server error');
 });
 const PORT = process.env.PORT || 3000;
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
+});
