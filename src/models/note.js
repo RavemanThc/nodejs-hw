@@ -14,6 +14,7 @@ const noteSchema = new Schema(
       default: '',
       trim: true,
     },
+    // 222
     tag: {
       type: String,
       default: 'Todo',
