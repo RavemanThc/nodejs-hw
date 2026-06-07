@@ -12,7 +12,7 @@ import {
   getAllNotesSchema,
   noteIdSchema,
   updateNoteSchema,
-} from '../validation/notesValidation.js';
+} from '../validations/notesValidation.js';
 
 const router = Router();
 router.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
