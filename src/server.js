@@ -20,7 +20,7 @@ app.use(
   }),
 );
 app.use(cors());
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(noteRouter);
 app.use(authRouters);
 app.use(notFoundHandler);

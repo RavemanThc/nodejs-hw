@@ -15,7 +15,6 @@ const noteSchema = new Schema(
       default: '',
       trim: true,
     },
-    // 222
     tag: {
       type: String,
       default: 'Todo',
@@ -24,7 +23,7 @@ const noteSchema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      requierd: true,
+      required: true,
     },
   },
   {

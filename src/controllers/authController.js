@@ -25,12 +25,12 @@ export const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    createHttpError(401, 'Invalid credentials');
+    throw createHttpError(401, 'Invalid credentials');
   }
 
   const isValidPassword = await bcrypt.compare(password, user.password);
   if (!isValidPassword) {
-    createHttpError(401, 'Invalid credentials');
+    throw createHttpError(401, 'Invalid credentials');
   }
 
   await Session.deleteOne({ userId: user._id });
@@ -50,9 +50,9 @@ export const logoutUser = async (req, res) => {
   res.status(204).send();
 };
 
-export const refreshSession = async (req, res) => {
+export const refreshUserSession = async (req, res) => {
   const { sessionId, refreshToken } = req.cookies;
-  if (sessionId || !refreshToken) {
+  if (!sessionId || !refreshToken) {
     throw createHttpError(401, 'Missing session credentials');
   }
   const session = await Session.findOne({ _id: sessionId, refreshToken });

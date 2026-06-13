@@ -24,13 +24,13 @@ export const setSessionCookies = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
     secure: true,
-    samSite: 'none',
+    sameSite: 'none',
     maxAge: ONE_DAY,
   });
   res.cookie('sessionId', session._id, {
     httpOnly: true,
     secure: true,
-    samSite: 'none',
+    sameSite: 'none',
     maxAge: ONE_DAY,
   });
 };
