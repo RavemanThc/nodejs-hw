@@ -10,3 +10,5 @@ router.patch(
   upload.single('avatar'),
   updateUserAvatar,
 );
+
+export default router;
