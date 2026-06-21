@@ -38,7 +38,7 @@ export const loginUser = async (req, res) => {
   }
 
   await Session.deleteOne({ userId: user._id });
-  const newSession = await await createSession(user._id);
+  const newSession = await createSession(user._id);
   setSessionCookies(res, newSession);
   res.status(200).json(user);
 };
@@ -93,7 +93,7 @@ export const requestResetEmail = async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: '15m' },
   );
-  const templatePath = path.resolve(`src/tamplates/reset-password-email.html`);
+  const templatePath = path.resolve(`src/templates/reset-password-email.html`);
   const templateSource = await fs.readFile(templatePath, 'utf-8');
   const template = handlebars.compile(templateSource);
   const html = template({
@@ -126,7 +126,7 @@ export const resetPassword = async (req, res) => {
   } catch {
     throw createHttpError(401, 'Invalid or expired token');
   }
-  const user = await User.gindOne({ _id: payload.sub, email: payload.email });
+  const user = await User.findOne({ _id: payload.sub, email: payload.email });
   if (!user) {
     throw createHttpError(404, 'User not found');
   }

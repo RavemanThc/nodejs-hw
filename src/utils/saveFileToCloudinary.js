@@ -14,8 +14,8 @@ export async function saveFileToCloudinary(buffer, userId) {
     resource_type: 'image',
     overwrite: true,
     unique_filename: false,
-    transformayion: [
-      { width: 500, height: 500, crop: 'gill', gravity: 'auto' },
+    transformation: [
+      { width: 500, height: 500, crop: 'fill', gravity: 'auto' },
       { fetch_format: 'auto', quality: 'auto' },
     ],
   };
